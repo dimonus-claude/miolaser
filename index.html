@@ -1372,8 +1372,11 @@
   .reviews-tab-btn .route-ico{width:22px;height:22px;font-size:10px;}
   .reviews-tab-btn[data-reviews-tab="yandex"] .route-ico{background:#FC3F1D;}
   .reviews-tab-btn[data-reviews-tab="2gis"] .route-ico{background:#279E3D;}
+  .reviews-tab-btn[data-reviews-tab="vk"] .route-ico{background:#0077FF;font-size:8px;letter-spacing:-.5px;}
   .reviews-panel{display:flex;flex-direction:column;align-items:flex-start;gap:18px;}
   .reviews-panel.hidden{display:none;}
+  /* Бейдж ВКонтакте в самой панели (крупнее, тот же приём, что и .stars) */
+  .rating-box-vk-ico{width:34px;height:34px;border-radius:8px;font-size:13px;background:#0077FF;}
 
   /* FAQ */
   .faq-list{max-width:760px;margin-top:40px;}
@@ -2074,6 +2077,9 @@
           <button type="button" class="reviews-tab-btn" role="tab" aria-selected="false" aria-controls="reviews-panel-2gis" id="reviews-tab-2gis" data-reviews-tab="2gis">
             <span class="route-ico">2</span>2ГИС
           </button>
+          <button type="button" class="reviews-tab-btn" role="tab" aria-selected="false" aria-controls="reviews-panel-vk" id="reviews-tab-vk" data-reviews-tab="vk">
+            <span class="route-ico">VK</span>ВКонтакте
+          </button>
         </div>
         <div class="reviews-panel" id="reviews-panel-yandex" role="tabpanel" aria-labelledby="reviews-tab-yandex">
           <div class="rating-box">
@@ -2089,9 +2095,15 @@
           </div>
           <a class="btn btn-ghost" href="https://2gis.ru/spb/search/MIOLASER" target="_blank" rel="noopener">Читать отзывы на 2ГИС</a>
         </div>
+        <div class="reviews-panel hidden" id="reviews-panel-vk" role="tabpanel" aria-labelledby="reviews-tab-vk">
+          <div class="rating-box">
+            <div class="route-ico rating-box-vk-ico">VK</div>
+            <div><b>Сообщество ВКонтакте</b><small>690+ подписчиков, отзывы и комментарии в обсуждениях</small></div>
+          </div>
+          <a class="btn btn-ghost" href="https://vk.ru/miolaser" target="_blank" rel="noopener">Читать отзывы во ВКонтакте</a>
+        </div>
       </div>
 
-      <p class="legal-note">Также можно почитать отзывы в <a href="https://vk.ru/miolaser" target="_blank" rel="noopener">группе ВКонтакте</a>.</p>
       <!-- Заметка для владельца (не выводится на сайт): после регистрации карточки компании
            в Яндекс Бизнесе в панель "Яндекс Карты" выше можно вставить официальный виджет
            отзывов с Яндекс Карт (iframe/скрипт из личного кабинета business.yandex.ru) —
