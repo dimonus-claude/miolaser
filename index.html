@@ -923,6 +923,20 @@
       background-size:contain;background-repeat:no-repeat;background-position:center;
       background-color:var(--text-primary);
     }
+    /* Главное фото героя на мобильных — отдельный вертикальный кадр
+       (images/photo-hero-mobile.jpg, 3:4), а не тот же широкий 16:9-кадр,
+       что на десктопе. С вертикальным кадром background-size:cover на
+       портретном экране закрывает его естественно, без обрезки в упор
+       (см. комментарий выше про .fixed-bg) и без пустых полей — поэтому
+       здесь для #media-hero переопределяем и картинку, и cover обратно
+       (у .fixed-bg выше — contain, это для десктопного кадра).
+       !important — перебивает инлайновый style на самом элементе
+       (там прописана десктопная картинка). */
+    #media-hero{
+      background-image:url("images/photo-hero-mobile.jpg")!important;
+      background-size:cover!important;background-position:center!important;
+      background-repeat:no-repeat;
+    }
   }
   .content-stack{
     position:relative;z-index:1;background:var(--bg-primary);
