@@ -996,6 +996,14 @@
   .hero-trust-chip{display:none;}
   @media (max-width:767px){
     .hero-trust-badge{display:none;}
+    /* На мобильных бейдж "Хорошее место" переезжает в левый верхний угол
+       фото (был в левом нижнем), строка лого+адрес — чуть ниже него
+       (просьба пользователя). Кружок Telegram у кнопки "Занять место" —
+       на мобильных лишний (дублирует плавающие кнопки и нижнюю
+       CTA-панель) — скрываем, кнопка остаётся одна и центруется сама
+       (в .hero-cta уже justify-content:center). */
+    .hero-trust-corner{top:16px;left:16px;bottom:auto;}
+    .hero-top-row{top:56px;}
     .hero-trust-chip{
       display:flex;align-items:center;gap:6px;
       background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.32);
@@ -1050,23 +1058,21 @@
   @supports not (min-height:100dvh){.hero-full{min-height:100vh;}}
   /* На маленьких экранах контент героя плотнее и прижат к верху (не по центру),
      чтобы важные элементы (значок, заголовок, кнопки) не обрезались */
-  /* Бейдж "Хорошее место" в углу — на телефонах/планшетах уводим выше от
-     нижнего края: (а) шапка на мобильном ~79px и физически "съедает"
-     нижнюю часть первого экрана у 100vh-секции hero-full (то же самое,
-     что и на десктопе, см. комментарий у .hero-trust-corner выше),
-     (б) плюс не пересекаться с плавающей мобильной CTA-панелью
-     (.sticky-cta, видна до 859px, ~74px + safe-area). */
-  @media (max-width:859px){
-    .hero-trust-corner{bottom:calc(79px + 74px + env(safe-area-inset-bottom) + 16px);}
-  }
+  /* Бейдж "Хорошее место" на телефонах/планшетах — теперь в верхнем углу
+     фото (см. .hero-trust-corner в блоке @media (max-width:767px) выше),
+     дополнительная нижняя отстройка от sticky-cta ему больше не нужна —
+     старое правило bottom:calc(...) для диапазона ≤859px убрано. */
   @media (max-width:520px){
-    .hero-full-content{justify-content:flex-start;padding:78px 0 24px;}
-    .hero-badge{width:42px;height:42px;padding:5px;}
-    .hero-top-row{top:16px;gap:8px;}
-    .hero-top-text{font-size:9.5px;letter-spacing:1.1px;}
-    .hero-top-text::before{width:14px;}
-    .hero-trust-corner{left:16px;}
-    .hero-trust-chip{font-size:9.5px;padding:5px 9px;}
+    /* padding-top уменьшен (было 78px) — просьба поднять H1 выше: строка
+       лого+адрес теперь короче/компактнее, и заголовок начинается сразу
+       под ней, без большого пустого зазора. */
+    .hero-full-content{justify-content:flex-start;padding:70px 0 24px;}
+    .hero-badge{width:34px;height:34px;padding:4px;}
+    .hero-top-row{top:46px;gap:6px;}
+    .hero-top-text{font-size:9px;letter-spacing:1px;}
+    .hero-top-text::before{width:12px;}
+    .hero-trust-corner{left:14px;top:14px;}
+    .hero-trust-chip{font-size:9px;padding:4px 8px;}
     .hero-full h1{font-size:clamp(1.35rem,7.4vw,2.1rem);margin-bottom:14px;}
     .hero-cta{gap:8px;margin-bottom:14px;}
     .hero-cta .btn, .hero-cta .btn-outline-light{padding:12px 20px;font-size:13.5px;}
@@ -1077,10 +1083,11 @@
   }
   /* Совсем невысокие экраны (напр. iPhone SE, 667px) — ещё плотнее */
   @media (max-width:520px) and (max-height:820px){
-    .hero-full-content{padding:48px 0 14px;}
-    .hero-badge{width:26px;height:26px;}
-    .hero-top-row{top:10px;gap:6px;}
-    .hero-top-text{font-size:8.5px;}
+    .hero-full-content{padding:44px 0 14px;}
+    .hero-badge{width:22px;height:22px;padding:3px;}
+    .hero-trust-corner{top:10px;left:12px;}
+    .hero-top-row{top:34px;gap:5px;}
+    .hero-top-text{font-size:8px;}
     .hero-trust-chip{font-size:8.5px;padding:4px 7px;}
     .hero-full h1{font-size:clamp(1.05rem,6.6vw,1.75rem);line-height:1.06;margin-bottom:8px;}
     .hero-cta{gap:6px;margin-bottom:8px;}
@@ -1456,7 +1463,10 @@
     .quick-contact-btn{animation:none;opacity:1;transform:none;}
   }
   .quick-contact-btn svg{width:24px;height:24px;}
-  @media (max-width:859px){.quick-contact{bottom:calc(90px + env(safe-area-inset-bottom));}}
+  /* На мобильных плавающие кружки Telegram/записи убраны совсем (просьба
+     пользователя) — их функции и так закрыты нижней sticky-панелью
+     "Позвонить" / "Записаться online". Остаются только на десктопе. */
+  @media (max-width:859px){.quick-contact{display:none;}}
 
   /* Дублирующие ссылки быстрой связи в hero, рядом с основным CTA */
   .hero-quick{display:flex;gap:10px;margin-left:4px;}
@@ -1468,6 +1478,12 @@
   }
   .hero-quick a:hover{transform:translateY(-2px);border-color:var(--accent-primary);}
   .hero-quick a svg{width:22px;height:22px;}
+  /* На мобильных кружок Telegram у кнопки "Занять место" убран (просьба
+     пользователя) — дублирует плавающие кнопки и нижнюю sticky-панель.
+     Кнопка остаётся одна и центруется сама (.hero-cta уже
+     justify-content:center). Правило — здесь, ПОСЛЕ базового
+     .hero-quick{display:flex;...} выше, чтобы точно выигрывать каскад. */
+  @media (max-width:767px){.hero-quick{display:none;}}
   @media (max-width:520px){.hero-cta{align-items:center;}}
 
   /* НАСТОЯЩАЯ причина бага "фото вылезает в самом низу страницы": .fixed-bg
