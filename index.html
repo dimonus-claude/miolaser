@@ -1346,6 +1346,14 @@
   .loyalty .lead{color:rgba(255,255,255,.72);}
   .loyalty-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px;}
   @media (max-width:860px){.loyalty-grid{grid-template-columns:1fr;gap:8px;margin-top:20px;}}
+  /* Кнопка-CTA после карточек лояльности — btn-outline-light (не btn-primary),
+     т.к. фон .loyalty тёмный тёмно-бирюзовый (var(--accent-hover)), почти
+     совпадающий с градиентом btn-primary — на нём кнопка была бы почти не
+     видна. outline-light уже используется на сайте именно для тёмных фонов
+     (см. .discount-strip) — так кнопка хорошо читается и не спорит с текстом. */
+  .loyalty-cta{margin-top:34px;text-align:center;}
+  .loyalty-cta .btn{padding:17px 38px;}
+  @media (max-width:700px){.loyalty-cta{margin-top:22px;}.loyalty-cta .btn{width:100%;padding:15px 20px;}}
   .loyalty-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:16px 18px;}
   @media (max-width:700px){.loyalty-card{padding:12px 14px;border-radius:6px;}}
   .loyalty-card summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px;}
@@ -2082,6 +2090,9 @@
             <summary><h3>Приведи подругу</h3></summary>
             <p>Расскажите о нас подруге — приятный бонус получаете вы обе. Подробности уточняйте у мастера.</p>
           </details>
+        </div>
+        <div class="loyalty-cta">
+          <a class="btn btn-outline-light" href="https://n952736.yclients.com/" target="_blank" rel="noopener">Приобрести абонемент</a>
         </div>
       </div>
     </div>
