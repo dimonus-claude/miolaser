@@ -1368,6 +1368,24 @@
   .loyalty-cta{margin-top:34px;text-align:center;}
   .loyalty-cta .btn{padding:17px 38px;}
   @media (max-width:700px){.loyalty-cta{margin-top:22px;}.loyalty-cta .btn{width:100%;padding:15px 20px;}}
+  /* У .btn-primary есть "переливающийся" бегущий градиент на hover
+     (background-position 0%→100%, см. .btn-primary выше) — но здесь фон
+     секции .loyalty тёмно-бирюзовый и почти совпадает с цветами того
+     градиента, кнопка была бы не видна (поэтому и стоит btn-outline-light,
+     а не btn-primary). Даём outline-кнопке ТУ ЖЕ механику переливания, но
+     на светлых полупрозрачных стоп-цветах — на тёмном фоне это читается
+     как мягкий блик, бегущий по кнопке, и при этом остаётся хорошо видно. */
+  .loyalty-cta .btn-outline-light{
+    background:linear-gradient(120deg,rgba(255,255,255,.14) 0%,rgba(255,255,255,.34) 45%,rgba(255,255,255,.14) 55%,rgba(255,255,255,.34) 100%);
+    background-size:260% 100%;background-position:0% 0%;
+    transition:background-position .7s cubic-bezier(.4,0,.2,1), transform .35s ease, box-shadow .5s ease, border-color .3s ease;
+  }
+  .loyalty-cta .btn-outline-light:hover{
+    background-position:100% 0%;
+    border-color:rgba(255,255,255,.85);
+    transform:translateY(-2px);
+    box-shadow:0 22px 40px -18px rgba(0,0,0,.4);
+  }
   .loyalty-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:16px 18px;}
   @media (max-width:700px){.loyalty-card{padding:12px 14px;border-radius:6px;}}
   .loyalty-card summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px;}
